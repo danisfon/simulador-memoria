@@ -35,7 +35,48 @@ public class Simulador {
 			decodificada.operando1 = extract_bits(instrucaoCodificada, 3, 3);
 			decodificada.operando2 = extract_bits(instrucaoCodificada, 0, 3);
 		}
-		return decodificada;
+		//instruções para o formato I:
+		else if(decodificada.format == 1) {
+			decodificada.opcode = extract_bits(instrucaoCodificada, 13, 2);
+			decodificada.imediato = extract_bits(instrucaoCodificada, 0, 10);
+		}
+		return decodificada; 	
+	}
+
+	public void executar(Instrucoes instrucoes){
+		if (instrucoes.format == 0){
+			if(instrucoes.opcode == 0){ //add
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] + registradores[instrucoes.operando2]);
+			}
+			else if(instrucoes.opcode == 1){ //sub
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] - registradores[instrucoes.operando2]);
+			}
+			else if(instrucoes.opcode == 2){ //mul 
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] * registradores[instrucoes.operando2]);
+			}
+			else if(instrucoes.opcode == 3){ //div
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
+			}
+			else if(instrucoes.opcode == 4){ //cmp_equal
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] == registradores[instrucoes.operando2]);
+			}
+			else if(instrucoes.opcode == 5){ //div
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
+			}
+			else if(instrucoes.opcode == 6){ //div
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
+			}
+			else if(instrucoes.opcode == 7){ //div
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
+			
+			else if(instrucoes.opcode == 8){ //div
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
+			}
+			else if(instrucoes.opcode == 9){ //div
+				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
+			}
+		}
+	}
 		
 	void load_binary (String binary_name)
 	{
