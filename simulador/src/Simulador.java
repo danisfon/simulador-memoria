@@ -58,13 +58,26 @@ public class Simulador {
 				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
 			}
 			else if(instrucoes.opcode == 4){ //cmp_equal
-				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] == registradores[instrucoes.operando2]);
+				if((registradores[instrucoes.operando1] == registradores[instrucoes.operando2])){
+					registradores[instrucoes.destino] = 1;
+				}else{
+					registradores[instrucoes.destino] = 0;
+				}
+				//registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] == registradores[instrucoes.operando2]);
 			}
-			else if(instrucoes.opcode == 5){ //div
-				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
+			else if(instrucoes.opcode == 5){ //cmp_neq
+				if((registradores[instrucoes.operando1] != registradores[instrucoes.operando2])){
+					registradores[instrucoes.destino] = 1;
+				}else{
+					registradores[instrucoes.destino] = 0;
+				}
+				//registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] + registradores[instrucoes.operando2]);
 			}
-			else if(instrucoes.opcode == 6){ //div
-				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
+			else if(instrucoes.opcode == 15){ //load
+				short endereco = registradores[instrucoes.operando1];
+				registradores[instrucoes.destino] = memory[endereco]; //armazena no registrador um valor da memória
+
+				registradores[instrucoes.destino] = memory[registradores[instrucoes.operando1]];
 			}
 			else if(instrucoes.opcode == 7){ //div
 				registradores[instrucoes.destino] = (short) (registradores[instrucoes.operando1] / registradores[instrucoes.operando2]);
