@@ -6,18 +6,34 @@ public class SimuladorMain {
     public static void main(String[] args) throws Exception {
         Simulador simuladoor = new Simulador();
         
-       /*  FileInputStream arquivo = new FileInputStream("c:\\xampp\\teste.dat");
-        
-        
-        FileInputStream arquivo = new FileInputStream("C:\\msys64\\home\\User\\arq-sim-assembler\\ps.bin"); 
-        
-        
-        DataInputStream data = new DataInputStream(arquivo);
+    String nomeArquivo = "C:\\msys64\\home\\User\\arq-sim-assembler\\greg.bin";   
+    simuladoor.load_binary(nomeArquivo);
+    
+    
+    for (int i = 0; i < Simulador.MEMORY_SIZE; i++) {
+        short instrucaoCodificada = simuladoor.memory[i];
 
-        String nome = data.readUTF();
-        System.out.println(nome);*/
+        Instrucoes instrucao = simuladoor.decodificar(instrucaoCodificada);
 
-        simuladoor.load_binary ("C:\\msys64\\home\\User\\arq-sim-assembler\\ali.bin");
+        if(!simuladoor.executar(instrucao)){
+            break;
+        }
+
+        simuladoor.executar(instrucao);
+
+
     }
 
+    for (int i = 0; i < simuladoor.registradores.length ; i++) {
+        System.out.println("Registrador r" + i + ":" + simuladoor.registradores[i]);   
+    }
+
+    System.out.println("\n");
+
+    for (int i = 0; i < 100 ; i++) {
+        System.out.println("Memória " + i + " : " + (simuladoor.memory[i] & 0xFFFF));
+        //0xFFFF para tirar as memórias negativas
+    }
+   
 }
+    }
